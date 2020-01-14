@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.transfo_analytics.model.EventTempDeviationMessage;
 
 @Service
 public class KafkaProducer {
@@ -18,10 +19,10 @@ public class KafkaProducer {
     @Autowired
     private KafkaTemplate<Object,Object> kafkaTemplate;
 
-    public void sendMessage(EventTempDeviation eventTempDeviation){
+    public void sendMessage(EventTempDeviationMessage eventTempDeviationMessage){
 
-        logger.info(String.format("$$ -> Producing message --> %s",eventTempDeviation));
-        this.kafkaTemplate.send(TOPIC,eventTempDeviation);
+        logger.info(String.format("$$ -> Producing message --> %s",eventTempDeviationMessage));
+        this.kafkaTemplate.send(TOPIC,eventTempDeviationMessage);
         //To be able to send an object rather than a string, the following property needs to be set:
         // spring.kafka.value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 

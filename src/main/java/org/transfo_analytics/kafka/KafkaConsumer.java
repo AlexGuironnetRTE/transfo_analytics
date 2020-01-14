@@ -1,10 +1,10 @@
 package org.transfo_analytics.kafka;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.lfenergy.operatorfabric.cards.model.Card;
 import org.lfenergy.operatorfabric.cards.model.CardCreationReport;
-import org.transfo_analytics.model.EventTempCardData;
-import org.transfo_analytics.model.EventTempDevDetailsProcessedData;
-import org.transfo_analytics.model.EventTempDeviation;
+import org.transfo_analytics.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +20,27 @@ public class KafkaConsumer {
     @Autowired
     CardPublisher cardPublisher;
 
+    @Autowired
+    ObjectMapper mapper;
+
     //TODO Why not use the application properties?
     @KafkaListener(topics = "dummy-event-temperature-deviation")
-    public void consume(EventTempDeviation eventTempDeviation){
+    public void consume(EventTempDeviationMessage eventTempDeviationMessage){
 
-        logger.info(String.format("$$ -> Consumed Message -> %s", eventTempDeviation));
+        logger.info(String.format("$$ -> Consumed Message -> %s", eventTempDeviationMessage));
 
-        EventTempCardData eventTempCardData = new EventTempCardData(eventTempDeviation,new EventTempDevDetailsProcessedData(eventTempDeviation.getDetails()));
+        //Transform message into data that is more easy to use to create
+
+        //Convert details string to object
+        EventTempDevDetails eventTempDevDetails = new EventTempDevDetails();
+        try {
+            eventTempDevDetails = mapper.readValue(eventTempDeviationMessage.getDetails(), EventTempDevDetails.class);
+        } catch (JsonProcessingException e) {
+            logger.error("Couldn't read EventTempDevDetails from string: "+eventTempDeviationMessage.getDetails());
+            e.printStackTrace();
+        }
+
+        EventTempCardData eventTempCardData = new EventTempCardData(eventTempDeviationMessage,new EventTempDevDetailsProcessedData(eventTempDevDetails));
 
         Card card = cardPublisher.createEventTempDevCard(eventTempCardData);
 

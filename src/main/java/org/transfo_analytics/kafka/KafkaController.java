@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.transfo_analytics.model.EventTempDeviation;
+import org.transfo_analytics.model.EventTempDeviationMessage;
 
 @RestController
 @RequestMapping(value = "/kafka")
@@ -21,9 +22,10 @@ public class KafkaController {
     }
 
     @PostMapping(value = "/publish")
-    public void sendMessageToKafkaTopic(@RequestBody EventTempDeviation eventTempDeviation){ //TODO Generic message type with metadata and inheritance from data object
-        System.out.println("Publish endpoint received: "+eventTempDeviation.toString());
-        this.kafkaProducer.sendMessage(eventTempDeviation);
+    public void sendMessageToKafkaTopic(@RequestBody EventTempDeviationMessage eventTempDeviationMessage){ //TODO Generic message type with metadata and inheritance from data object
+        System.out.println("Publish endpoint received: "+eventTempDeviationMessage.toString());
+
+        this.kafkaProducer.sendMessage(eventTempDeviationMessage);
 
     }
 

@@ -24,15 +24,15 @@ public class CardPublisher {
         String process = "event_temp_dev";
 
         card.setProcess(process);
-        card.setProcessId(process+"_"+eventTempCardData.getEventTempDeviation().getTransformer_name()+"_"+eventTempCardData.getEventTempDeviation().getTime());
+        card.setProcessId(process+"_"+eventTempCardData.getEventTempDeviationMessage().getTransformer_name()+"_"+eventTempCardData.getEventTempDeviationMessage().getTime());
         card.setPublisher("TRANSFORMERS");
         card.setPublisherVersion("1");
 
-        Instant eventTimeStamp = Instant.ofEpochMilli(eventTempCardData.getEventTempDeviation().getTime());
+        Instant eventTimeStamp = Instant.ofEpochMilli(eventTempCardData.getEventTempDeviationMessage().getTime());
 
-        card.setLttd(eventTempCardData.getEventTempDeviation().getTime());
-        card.setStartDate(eventTempCardData.getEventTempDeviation().getTime());
-        card.setEndDate(eventTempCardData.getEventTempDeviation().getTime()+ 2*60*60*1000); //TODO Do something clever with dates
+        card.setLttd(eventTempCardData.getEventTempDeviationMessage().getTime());
+        card.setStartDate(eventTempCardData.getEventTempDeviationMessage().getTime());
+        card.setEndDate(eventTempCardData.getEventTempDeviationMessage().getTime()+ 2*60*60*1000); //TODO Do something clever with dates
 
         //TODO Fix timestamp for timeline
 
@@ -46,14 +46,14 @@ public class CardPublisher {
         I18n i18nTitle = new I18n();
         i18nTitle.setKey(process+".title");
         HashMap<String,String> i18nTitleParams = new HashMap<>();
-        i18nTitleParams.put("value",eventTempCardData.getEventTempDeviation().getTransformer_name());
+        i18nTitleParams.put("value",eventTempCardData.getEventTempDeviationMessage().getTransformer_name());
         i18nTitle.setParameters(i18nTitleParams);
         card.setTitle(i18nTitle);
 
         I18n i18nSummary = new I18n();
         i18nSummary.setKey(process+".summary");
         HashMap<String,String> i18nSummaryParams = new HashMap<>();
-        i18nSummaryParams.put("value",eventTempCardData.getEventTempDeviation().getTransformer_name());
+        i18nSummaryParams.put("value",eventTempCardData.getEventTempDeviationMessage().getTransformer_name());
         i18nSummary.setParameters(i18nSummaryParams);
         card.setSummary(i18nSummary);
 

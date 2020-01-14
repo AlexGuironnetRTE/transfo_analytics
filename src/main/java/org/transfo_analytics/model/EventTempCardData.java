@@ -8,20 +8,20 @@ import lombok.Setter;
 
 public class EventTempCardData {
 
-    private EventTempDeviation eventTempDeviation;
+    private EventTempDeviationMessage eventTempDeviationMessage;
     private EventTempDevDetailsProcessedData eventTempDevDetailsProcessedData;
 
-    public EventTempCardData(EventTempDeviation eventTempDeviation, EventTempDevDetailsProcessedData eventTempDevDetailsProcessedData) {
-        this.eventTempDeviation = eventTempDeviation;
+    public EventTempCardData(EventTempDeviationMessage eventTempDeviationMessage, EventTempDevDetailsProcessedData eventTempDevDetailsProcessedData) {
+        this.eventTempDeviationMessage = eventTempDeviationMessage;
         this.eventTempDevDetailsProcessedData = eventTempDevDetailsProcessedData;
     }
 
-    public EventTempDeviation getEventTempDeviation() {
-        return eventTempDeviation;
+    public EventTempDeviationMessage getEventTempDeviationMessage() {
+        return eventTempDeviationMessage;
     }
 
-    public void setEventTempDeviation(EventTempDeviation eventTempDeviation) {
-        this.eventTempDeviation = eventTempDeviation;
+    public void setEventTempDeviation(EventTempDeviationMessage eventTempDeviationMessage) {
+        this.eventTempDeviationMessage = eventTempDeviationMessage;
     }
 
     public EventTempDevDetailsProcessedData getEventTempDevDetailsProcessedData() {
