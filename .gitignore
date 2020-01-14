@@ -56,9 +56,6 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-# Dependencies that can't be pulled from Maven
-/libs
-
 # Tar.gz bundles
 bundles/**/*.tar.gz
 
