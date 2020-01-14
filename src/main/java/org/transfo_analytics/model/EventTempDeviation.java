@@ -11,6 +11,8 @@ public class EventTempDeviation {
     private String transformer_name;
     private String flag; //TODO Maybe switch to enum ?
 
+    private EventTempDevDetails details;
+
     public long getTime() {
         return time;
     }
@@ -21,6 +23,10 @@ public class EventTempDeviation {
 
     public String getFlag() {
         return flag;
+    }
+
+    public EventTempDevDetails getDetails() {
+        return details;
     }
 
     //TODO Find a way to make Jackson serialization recognize Lombok generated getters
