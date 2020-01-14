@@ -8,14 +8,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+import org.transfo_analytics.operatorfabric.CardPublisher;
 
 @Service
 public class KafkaConsumer {
 
     private final Logger logger = LoggerFactory.getLogger(KafkaConsumer.class);
 
-/*    @Autowired
-    CardPublisher cardPublisher;*/
+    @Autowired
+    CardPublisher cardPublisher;
 
     //TODO Why not use the application properties?
     @KafkaListener(topics = "dummy-event-temperature-deviation")
@@ -23,13 +24,13 @@ public class KafkaConsumer {
 
         logger.info(String.format("$$ -> Consumed Message -> %s", eventTempDeviation));
 
-        /*Card card = cardPublisher.createISSCard(eventTempDeviation);
+        Card card = cardPublisher.createEventTempDevCard(eventTempDeviation);
 
         logger.info("Created card: "+card.toString());
 
         CardCreationReport report = cardPublisher.publishCard(card);
 
-        logger.info("Card publication report: "+report.toString());*/
+        logger.info("Card publication report: "+report.toString());
 
     }
 
