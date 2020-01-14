@@ -2,6 +2,8 @@ package org.transfo_analytics.kafka;
 
 import org.lfenergy.operatorfabric.cards.model.Card;
 import org.lfenergy.operatorfabric.cards.model.CardCreationReport;
+import org.transfo_analytics.model.EventTempCardData;
+import org.transfo_analytics.model.EventTempDevDetailsProcessedData;
 import org.transfo_analytics.model.EventTempDeviation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +26,9 @@ public class KafkaConsumer {
 
         logger.info(String.format("$$ -> Consumed Message -> %s", eventTempDeviation));
 
-        Card card = cardPublisher.createEventTempDevCard(eventTempDeviation);
+        EventTempCardData eventTempCardData = new EventTempCardData(eventTempDeviation,new EventTempDevDetailsProcessedData(eventTempDeviation.getDetails()));
+
+        Card card = cardPublisher.createEventTempDevCard(eventTempCardData);
 
         logger.info("Created card: "+card.toString());
 

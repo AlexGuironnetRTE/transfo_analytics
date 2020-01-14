@@ -1,6 +1,7 @@
 package org.transfo_analytics.operatorfabric;
 
 import org.lfenergy.operatorfabric.cards.model.*;
+import org.transfo_analytics.model.EventTempCardData;
 import org.transfo_analytics.model.EventTempDeviation;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,22 +17,22 @@ import java.util.HashMap;
 @Service
 public class CardPublisher {
 
-    public Card createEventTempDevCard(EventTempDeviation eventTempDeviation) {
+    public Card createEventTempDevCard(EventTempCardData eventTempCardData) {
 
         Card card = new Card();
 
         String process = "event_temp_dev";
 
         card.setProcess(process);
-        card.setProcessId(process+"_"+eventTempDeviation.getTransformer_name()+"_"+eventTempDeviation.getTime());
+        card.setProcessId(process+"_"+eventTempCardData.getEventTempDeviation().getTransformer_name()+"_"+eventTempCardData.getEventTempDeviation().getTime());
         card.setPublisher("TRANSFORMERS");
         card.setPublisherVersion("1");
 
-        Instant eventTimeStamp = Instant.ofEpochMilli(eventTempDeviation.getTime());
+        Instant eventTimeStamp = Instant.ofEpochMilli(eventTempCardData.getEventTempDeviation().getTime());
 
-        card.setLttd(eventTempDeviation.getTime());
-        card.setStartDate(eventTempDeviation.getTime());
-        card.setEndDate(eventTempDeviation.getTime()+ 2*60*60*1000); //TODO Do something clever with dates
+        card.setLttd(eventTempCardData.getEventTempDeviation().getTime());
+        card.setStartDate(eventTempCardData.getEventTempDeviation().getTime());
+        card.setEndDate(eventTempCardData.getEventTempDeviation().getTime()+ 2*60*60*1000); //TODO Do something clever with dates
 
         //TODO Fix timestamp for timeline
 
@@ -45,20 +46,20 @@ public class CardPublisher {
         I18n i18nTitle = new I18n();
         i18nTitle.setKey(process+".title");
         HashMap<String,String> i18nTitleParams = new HashMap<>();
-        i18nTitleParams.put("value",eventTempDeviation.getTransformer_name());
+        i18nTitleParams.put("value",eventTempCardData.getEventTempDeviation().getTransformer_name());
         i18nTitle.setParameters(i18nTitleParams);
         card.setTitle(i18nTitle);
 
         I18n i18nSummary = new I18n();
         i18nSummary.setKey(process+".summary");
         HashMap<String,String> i18nSummaryParams = new HashMap<>();
-        i18nSummaryParams.put("value",eventTempDeviation.getTransformer_name());
+        i18nSummaryParams.put("value",eventTempCardData.getEventTempDeviation().getTransformer_name());
         i18nSummary.setParameters(i18nSummaryParams);
         card.setSummary(i18nSummary);
 
         card.setState("firstState");
 
-        card.setData(eventTempDeviation);
+        card.setData(eventTempCardData);
 
         return card;
     }
