@@ -22,6 +22,7 @@ public class KafkaController {
 
     @PostMapping(value = "/publish")
     public void sendMessageToKafkaTopic(@RequestBody EventTempDeviation eventTempDeviation){ //TODO Generic message type with metadata and inheritance from data object
+        System.out.println("Publish endpoint received: "+eventTempDeviation.toString());
         this.kafkaProducer.sendMessage(eventTempDeviation);
 
     }
