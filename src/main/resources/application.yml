@@ -3,23 +3,18 @@ server:
 
 spring:
   kafka:
+    bootstrap-servers:
+      - wn0-lfehdi.2izskeo3vv5erixfjyzgyskg2e.parx.internal.cloudapp.net:6667
+      - wn1-lfehdi.2izskeo3vv5erixfjyzgyskg2e.parx.internal.cloudapp.net:6667
+      - wn2-lfehdi.2izskeo3vv5erixfjyzgyskg2e.parx.internal.cloudapp.net:6667
+      - wn3-lfehdi.2izskeo3vv5erixfjyzgyskg2e.parx.internal.cloudapp.net:6667
     consumer:
-      bootstrap-servers:
-        - wn0-lfehdi.2izskeo3vv5erixfjyzgyskg2e.parx.internal.cloudapp.net:6667
-        - wn1-lfehdi.2izskeo3vv5erixfjyzgyskg2e.parx.internal.cloudapp.net:6667
-        - wn2-lfehdi.2izskeo3vv5erixfjyzgyskg2e.parx.internal.cloudapp.net:6667
-        - wn3-lfehdi.2izskeo3vv5erixfjyzgyskg2e.parx.internal.cloudapp.net:6667
       group-id: opfab-analytics-consumer
       auto-offset-reset: latest
       enable_auto_commit: false
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     producer:
-      bootstrap-servers:
-        - wn0-lfehdi.2izskeo3vv5erixfjyzgyskg2e.parx.internal.cloudapp.net:6667
-        - wn1-lfehdi.2izskeo3vv5erixfjyzgyskg2e.parx.internal.cloudapp.net:6667
-        - wn2-lfehdi.2izskeo3vv5erixfjyzgyskg2e.parx.internal.cloudapp.net:6667
-        - wn3-lfehdi.2izskeo3vv5erixfjyzgyskg2e.parx.internal.cloudapp.net:6667
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
