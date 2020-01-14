@@ -13,4 +13,15 @@ public class EventTempDevDetails {
     private List<Long> index;
     private List<List<Long>> data;
 
+    public List<String> getColumns() {
+        return columns;
+    }
+
+    public List<Long> getIndex() {
+        return index;
+    }
+
+    public List<List<Long>> getData() {
+        return data;
+    }
 }
