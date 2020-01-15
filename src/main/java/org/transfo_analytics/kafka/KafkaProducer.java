@@ -14,7 +14,7 @@ public class KafkaProducer {
     //TODO Replace with Slf4j and annotation
     private static final Logger logger = LoggerFactory.getLogger(KafkaProducer.class);
 
-    private static final String TOPIC = "dummy-event-temperature-deviation";
+    private static final String TOPIC = "event-temperature-deviation";
 
     @Autowired
     private KafkaTemplate<Object,Object> kafkaTemplate;

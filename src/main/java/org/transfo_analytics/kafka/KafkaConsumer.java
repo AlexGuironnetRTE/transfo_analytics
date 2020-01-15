@@ -24,7 +24,7 @@ public class KafkaConsumer {
     ObjectMapper mapper;
 
     //TODO Why not use the application properties?
-    @KafkaListener(topics = "dummy-event-temperature-deviation")
+    @KafkaListener(topics = "event-temperature-deviation")
     public void consume(EventTempDeviationMessage eventTempDeviationMessage){
 
         logger.info(String.format("$$ -> Consumed Message -> %s", eventTempDeviationMessage));
