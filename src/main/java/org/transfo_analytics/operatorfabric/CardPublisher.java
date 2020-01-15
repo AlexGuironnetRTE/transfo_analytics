@@ -30,9 +30,9 @@ public class CardPublisher {
 
         Instant eventTimeStamp = Instant.ofEpochMilli(eventTempCardData.getEventTempDeviationMessage().getTime());
 
-        card.setLttd(eventTempCardData.getEventTempDeviationMessage().getTime());
-        card.setStartDate(eventTempCardData.getEventTempDeviationMessage().getTime());
-        card.setEndDate(eventTempCardData.getEventTempDeviationMessage().getTime()+ 2*60*60*1000); //TODO Do something clever with dates
+        card.setLttd(eventTempCardData.getEventTempDeviationMessage().getTime()*1000);
+        card.setStartDate(eventTempCardData.getEventTempDeviationMessage().getTime()*1000);
+        card.setEndDate(eventTempCardData.getEventTempDeviationMessage().getTime()*1000+ 2*60*60*1000); //TODO Do something clever with dates
 
         //TODO Fix timestamp for timeline
 
