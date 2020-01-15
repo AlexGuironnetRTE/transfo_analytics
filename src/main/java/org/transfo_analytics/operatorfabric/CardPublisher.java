@@ -28,6 +28,8 @@ public class CardPublisher {
         card.setPublisher("TRANSFORMERS");
         card.setPublisherVersion("1");
 
+        card.addTagsItem(eventTempCardData.getEventTempDeviationMessage().getTransformer_name());
+
         Instant eventTimeStamp = Instant.ofEpochMilli(eventTempCardData.getEventTempDeviationMessage().getTime());
 
         card.setLttd(eventTempCardData.getEventTempDeviationMessage().getTime()*1000);
