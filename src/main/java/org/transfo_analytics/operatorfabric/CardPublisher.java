@@ -36,7 +36,18 @@ public class CardPublisher {
 
         //TODO Fix timestamp for timeline
 
-        card.setSeverity(SeverityEnum.ALARM);
+
+        //Test on flag
+        if(eventTempCardData.getEventTempDeviationMessage().getFlag()=="failed") {
+            card.setSeverity(SeverityEnum.ALARM);
+            card.setState("dev");
+        } else if(eventTempCardData.getEventTempDeviationMessage().getFlag()=="good") {
+            card.setSeverity(SeverityEnum.QUESTION);
+            card.setState("no_dev");
+        } else {
+            card.setSeverity(SeverityEnum.ACTION);
+            card.setState("dev"); //TODO undecided status
+        }
 
         Recipient adminUser = new Recipient();
         adminUser.setType(RecipientEnum.USER);
@@ -57,7 +68,7 @@ public class CardPublisher {
         i18nSummary.setParameters(i18nSummaryParams);
         card.setSummary(i18nSummary);
 
-        card.setState("firstState");
+
 
         card.setData(eventTempCardData);
 
