@@ -38,10 +38,11 @@ public class CardPublisher {
 
 
         //Test on flag
-        if(eventTempCardData.getEventTempDeviationMessage().getFlag()=="failed") {
+        System.out.println("Flag for received card was: "+eventTempCardData.getEventTempDeviationMessage().getFlag());
+        if(eventTempCardData.getEventTempDeviationMessage().getFlag().matches("failed")) {
             card.setSeverity(SeverityEnum.ALARM);
             card.setState("dev");
-        } else if(eventTempCardData.getEventTempDeviationMessage().getFlag()=="good") {
+        } else if(eventTempCardData.getEventTempDeviationMessage().getFlag().matches("good")) {
             card.setSeverity(SeverityEnum.QUESTION);
             card.setState("no_dev");
         } else {
